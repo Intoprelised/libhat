@@ -24,14 +24,14 @@ namespace hat {
         const auto digits = base < 10 ? base : 10;
         const auto letters = base > 10 ? base - 10 : 0;
 
-        for (auto iter = begin; iter != end; iter++) {
+        for (auto iter = begin; iter != end; ++iter) {
             const char ch = *iter;
 
             if constexpr (std::is_signed_v<Integer>) {
                 if (iter == begin) {
                     if (ch == '+') {
                         continue;
-                    } else if (ch == '-') {
+                    } if (ch == '-') {
                         sign = -1;
                         continue;
                     }
@@ -54,7 +54,7 @@ namespace hat {
     }
 
     template<typename Integer>
-    inline constexpr result<Integer, parse_int_error> parse_int(std::string_view str, int base = 10) noexcept {
+    inline constexpr result<Integer, parse_int_error> parse_int(const std::string_view str, int base = 10) noexcept {
         return parse_int<Integer>(str.cbegin(), str.cend(), base);
     }
 }

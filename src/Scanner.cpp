@@ -8,7 +8,7 @@ namespace hat {
     using namespace hat::process;
 
     template<scan_alignment alignment>
-    scan_result find_pattern(signature_view signature, module_t mod) {
+    scan_result find_pattern(const signature_view signature, const module_t mod) {
         const auto data = get_module_data(mod);
         if (data.empty()) {
             return nullptr;
@@ -17,7 +17,7 @@ namespace hat {
     }
 
     template<scan_alignment alignment>
-    scan_result find_pattern(signature_view signature, std::string_view section, module_t mod) {
+    scan_result find_pattern(const signature_view signature, const std::string_view section, const module_t mod) {
         const auto data = get_section_data(mod, section);
         if (data.empty()) {
             return nullptr;
@@ -34,7 +34,7 @@ namespace hat {
 namespace hat::detail {
 
     template<scan_alignment alignment>
-    scan_result find_pattern(const std::byte* begin, const std::byte* end, signature_view signature) {
+    scan_result find_pattern(const std::byte* begin, const std::byte* end, const signature_view signature) {
 #if defined(LIBHAT_X86)
         const auto& ext = get_system().extensions;
         if (ext.bmi1) {

@@ -32,7 +32,7 @@ namespace hat {
         }
 
         /// Resolve the relative address located at an offset from the signature result
-        [[nodiscard]] constexpr const std::byte* rel(size_t offset) const {
+        [[nodiscard]] constexpr const std::byte* rel(const size_t offset) const {
             return this->has_result() ? this->result + this->read<rel_t>(offset) + offset + sizeof(rel_t) : nullptr;
         }
 
@@ -95,7 +95,7 @@ namespace hat {
             if constexpr (stride == 1) {
                 return ptr;
             }
-            uintptr_t mod = reinterpret_cast<uintptr_t>(ptr) % stride;
+            const uintptr_t mod = reinterpret_cast<uintptr_t>(ptr) % stride;
             return ptr - mod;
         }
 

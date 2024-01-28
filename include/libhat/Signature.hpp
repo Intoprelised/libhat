@@ -68,7 +68,7 @@ namespace hat {
         return bytes_to_signature(std::bit_cast<bytes>(value));
     }
 
-    [[nodiscard]] constexpr signature string_to_signature(std::string_view str) {
+    [[nodiscard]] constexpr signature string_to_signature(const std::string_view str) {
         signature sig{};
         sig.reserve(str.size());
         for (char ch : str) {
